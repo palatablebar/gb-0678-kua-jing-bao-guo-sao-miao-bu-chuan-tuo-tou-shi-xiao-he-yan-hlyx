@@ -1,0 +1,6 @@
+#mode=patch
+#withdraw=0110
+scan_id,parcel,node,event_time,received_time,destination,promised_hours,declared_value,reported,note
+0102,0001,清关,2026-11-18T12:00:00Z,2026-11-18T13:00:00Z,JP,24,200,0,补片新增
+0103,0001,妥投,2026-11-18T18:00:00Z,2026-11-19T01:00:00Z,JP,24,200,5.00,补片妥投
+0101,0001,起运,2026-11-18T06:00:00Z,2026-11-18T07:00:00Z,JP,24,200,0,首批

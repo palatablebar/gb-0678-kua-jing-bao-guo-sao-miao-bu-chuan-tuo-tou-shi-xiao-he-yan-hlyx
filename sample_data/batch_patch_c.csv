@@ -1,0 +1,3 @@
+scan_id,parcel,node,event_time,received_time,destination,promised_hours,declared_value,reported,note
+0200,0003,收件,2026-11-18T02:00:00Z,2026-11-18T03:00:00Z,DE,72,500,0,无指令补片
+0201,0003,起运,2026-11-18T08:00:00Z,2026-11-18T09:00:00Z,DE,72,500,0,无指令补片

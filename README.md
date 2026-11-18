@@ -38,6 +38,10 @@ docker compose exec -T app pytest -q
 
 `POST /api/runs` 接收sample或csv；`GET /api/runs`返回历史批次；`POST /api/runs/<id>/review`需要version与decision；`GET /api/runs/<id>/archive`返回唯一证据导出。
 
+## 同日重传与唯一扫描全集
+
+同日扫描可拆成多个文件送达。`POST /api/batches`（multipart 重复字段 `files`，或 JSON `csv_files` 数组）按文件首部 `#mode=full|patch` 指令识别整批覆盖或补片；无指令时按撤回线索与覆盖度推断，无法判定返回 `AMBIGUOUS_MODE`。补片只增删差量，整批一次性替换，`#withdraw=scan_id` 撤回既有扫描；同键同值计重复、同键异值隔离并保留原值。解析全部成功后单事务切换全集，任一文件失败保留上一可用批次；文件按 sha256 去重，同一补片重试不新增。路径裁决与时效计算只读取全集。协议见 `docs/BATCH-INGEST.md`，页面 `/scans` 底部含新扫描、重复扫描、撤回扫描的判定口径。
+
 ## 范围
 
 样例均为虚构。单机复核工具不连接生产系统；不提供登录、远端数据库或自动支付。内存计算按4MB输入上限控制，SQLite事务保证结果完整写入。

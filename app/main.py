@@ -48,6 +48,8 @@ def create_app():
     for index,(slug,title) in enumerate(MODULES,1):
         module=importlib.import_module(f"app.modules.m{index}_{slug}.handler")
         application.register_blueprint(module.bp)
+    from app.modules.m1_scans.batch_handler import bp as batch_bp
+    application.register_blueprint(batch_bp)
     register_pages(application)
     return application
 app=create_app()

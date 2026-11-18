@@ -1,0 +1,6 @@
+#mode=full
+#date=2026-11-18
+scan_id,parcel,node,event_time,received_time,destination,promised_hours,declared_value,reported,note
+0100,0001,收件,2026-11-18T00:00:00Z,2026-11-18T01:00:00Z,JP,24,200,0,首批
+0101,0001,起运,2026-11-18T06:00:00Z,2026-11-18T07:00:00Z,JP,24,200,0,首批
+0110,0002,收件,2026-11-18T00:30:00Z,2026-11-18T01:30:00Z,US,48,300,0,首批

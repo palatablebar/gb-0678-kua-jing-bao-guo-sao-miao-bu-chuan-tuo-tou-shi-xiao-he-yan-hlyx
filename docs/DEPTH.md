@@ -26,6 +26,10 @@
 | TRAP-14 | 重复键冲突 | 后写覆盖 | 保留首条并隔离冲突行 | `app/modules/m1_scans/rules.py` | `tests/test_m1.py::test_duplicate_conflict_real_sample` |
 | TRAP-18 | 空态三态 | 一律成功 | 分别错误码 | `app/modules/m1_scans/rules.py` | `tests/test_m1.py::test_three_empty_states` |
 | TRAP-26 | 旧版本提交 | 覆盖新结果 | 版本条件更新 | `app/store.py` | `tests/test_e2e.py::test_stale_review_409` |
+| TRAP-31 | 补片误判整批 | 先前扫描被整体丢弃 | `#mode` 显式声明+线索推断，歧义拒绝 | `app/batch.py` | `tests/test_batch.py::test_mode_inference_rules` |
+| TRAP-32 | 撤回后仍累加 | 已撤回扫描继续参与核算 | 全集按 scan_id 删差，整批替换旧全集 | `app/batch.py` | `tests/test_batch.py::test_full_retransmission_replaces_whole_batch` |
+| TRAP-33 | 坏文件污染批次 | 半切换状态对外可见 | 内存裁决成功后单事务一次性切换 | `app/store.py` | `tests/test_batch.py::test_parse_failure_keeps_previous_snapshot` |
+| TRAP-34 | 同一补片重试 | 重复入账、批次膨胀 | 文件 sha256 去重与快照指纹复用 | `app/store.py` | `tests/test_batch.py::test_patch_retry_is_idempotent_and_adds_nothing` |
 | TRAP-06 | 全角时限 | 数字转换失败 | Decimal归一 | `app/values.py` | `tests/test_m3.py::test_numeric_normalization` |
 | TRAP-07 | 时限哨兵 | 按零赔付 | 隔离缺失 | `app/values.py` | `tests/test_m3.py::test_real_sentinel_not_zero` |
 | TRAP-11 | 目的地偏移 | 同刻多桶 | UTC比较 | `app/values.py` | `tests/test_m3.py::test_equivalent_timezone` |

@@ -19,6 +19,9 @@ def evaluate(rows,context):
             bad.extend(reject(e,"MISSING_ACCEPT","缺少收件扫描") for e in valid);continue
         delivery=next((e for e in valid if e["node"]=="DELIVERED"),None)
         first=accepts[0]
-        source_lines=[line for e in valid for line in sources(e)]
+        source_lines=[]
+        for e in valid:
+            for line in sources(e):
+                if line not in source_lines: source_lines.append(line)
         good.append({**first,"_sources":source_lines,"accepted_at":first["event_utc"],"delivered_at":delivery["event_utc"] if delivery else None,"delivery_uploaded_at":delivery["received_utc"] if delivery else None,"scan_count":len(valid),"path":" → ".join(e["node"] for e in valid),"reported":delivery["reported"] if delivery else first["reported"]})
     return {"rows":good,"quarantine":bad,"metrics":{"parcels":len(good),"delivered":sum(r["delivered_at"] is not None for r in good),"path_errors":len(bad)}}
